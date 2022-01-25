@@ -7,9 +7,7 @@ export default function MakeStacks() {
   const columnsArray = [];
   const rows = useRecoilValue(numberOfRows);
   for (let i = rows; i > 0; i--) {
-    columnsArray.push(
-      <RowOfButtons key={`row-${i}`} currentRow={i} answer="undefined" />
-    );
+    columnsArray.push(<RowOfButtons key={`row-${i}`} currentRow={i} />);
     // console.log(columnsArray);
   }
 

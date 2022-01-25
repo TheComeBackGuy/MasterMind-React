@@ -1,6 +1,6 @@
 import "./index.css";
 
-import CreateAnswer from "./components/CreateAnswer";
+// import { CreateAnswer } from "./components/CreateAnswer";
 import TotalGrid from "./components/TotalGrid";
 
 export default function App() {
@@ -9,7 +9,7 @@ export default function App() {
       <header>
         <h1> MASTERMIND</h1>
       </header>
-      <TotalGrid answer={CreateAnswer()} />
+      <TotalGrid />
       <footer>
         Designed and developed by Dennis Hart based on Hasbro Game.
       </footer>

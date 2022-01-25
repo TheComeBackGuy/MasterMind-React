@@ -1,24 +1,26 @@
+import { MManswer } from "../data/atoms";
 import { numberOfColumns } from "../data/atoms.js";
 import { useRecoilValue } from "recoil";
+import { useSetRecoilState } from "recoil";
 
-// import { MManswer } from "../data/atoms";
-// import { useRecoilState }from 'recoil'
+// import { useEffect } from "react";
 
-export default function CreateAnswer() {
-  // const [answer, setAnswer] = useRecoilState(MManswer);
+export function CreateAnswer() {
+  const setAnswer = useSetRecoilState(MManswer);
   const marbles = ["yellow", "red", "blue", "green", "purple"];
   const cols = useRecoilValue(numberOfColumns);
   const tempAnswer = [];
 
+  // useEffect(() => {
+  //   console.log(answer);
+  // }, [answer]);
+
   for (let i = 0; i < cols; i++) {
     tempAnswer.push(marbles[Math.floor(Math.random() * marbles.length)]);
-    // setAnswer([...answer, marbles[Math.floor(Math.random() * marbles.length)]]);
+    // console.log(answer);
+    console.log(`This is Column ${i} of  ${cols}`);
   }
-
-  console.log(cols);
   console.log(tempAnswer);
-
-  return tempAnswer;
-
-  // return <h1>{answer}</h1>;
+  setAnswer(marbles);
+  // return "answer";
 }

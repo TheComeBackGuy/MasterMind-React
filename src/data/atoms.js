@@ -2,7 +2,7 @@ import { atom } from "recoil";
 
 export const MManswer = atom({
   key: "MManswer",
-  default: [],
+  default: ["red", "red", "yellow", "blue", "green"],
 });
 
 export const numberOfRows = atom({
@@ -12,5 +12,5 @@ export const numberOfRows = atom({
 
 export const numberOfColumns = atom({
   key: "number-of-columns",
-  default: 15,
+  default: 5,
 });

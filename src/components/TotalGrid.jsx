@@ -1,6 +1,6 @@
+import AnswerRow from "./AnswerRow";
 import MakeStacks from "./MakeStacks";
 import React from "react";
-import RowOfButtons from "./RowOfButtons";
 
 export default function TotalGrid({ answer }) {
   return (
@@ -10,7 +10,7 @@ export default function TotalGrid({ answer }) {
         <div className="divot ur"></div>
       </div>
       {/* <RowOfButtons answer={answer} /> */}
-      <RowOfButtons answer={answer} />
+      <AnswerRow />
       <MakeStacks />
       <div className="divotContainer">
         <div className="divot bl"></div>
