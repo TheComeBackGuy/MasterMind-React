@@ -1,25 +1,16 @@
-import logo from './logo.svg';
-import './App.css';
+import "./index.css";
 
-function App() {
+import CreateAnswer from "./components/CreateAnswer";
+import TotalGrid from "./components/TotalGrid";
+
+export default function App() {
+  CreateAnswer();
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+    <div>
+      <header>
+        <h1> MASTERMIND</h1>
       </header>
+      <TotalGrid />
     </div>
   );
 }
-
-export default App;
