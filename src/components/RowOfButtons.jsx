@@ -1,13 +1,13 @@
+import { activeRow, numberOfColumns } from "../data/atoms";
 import { handleButton, handleButtonRollover } from "../utils/globalFunctions";
 
 import React from "react";
-import { numberOfColumns } from "../data/atoms";
 import { useRecoilValue } from "recoil";
 
 export default function RowOfButtons({ currentRow }) {
   const thisRow = [];
   const columns = useRecoilValue(numberOfColumns);
-
+  const activeRowNow = useRecoilValue(activeRow);
   //if fed an answer, RoOfButtons will just make a row of answer buttons
 
   // `${answer[answer.indexOf(row)]}`;
@@ -18,11 +18,11 @@ export default function RowOfButtons({ currentRow }) {
         key={`button-r${currentRow}c${i}`}
         id={`r${currentRow}c${i}`}
         className="hole"
-        onClick={(e) => handleButton(e)}
+        onClick={(e) => handleButton(e, activeRowNow, currentRow)}
         onMouseOver={(e) => {
-          handleButtonRollover(e);
+          handleButtonRollover(e, activeRowNow, currentRow);
         }}
-        onMouseLeave={(e) =>
+        onMouseLeave={(e, activeRowNow, currentRow) =>
           (e.target.style.border = "1px solid var(--darkGrey)")
         }
       >
