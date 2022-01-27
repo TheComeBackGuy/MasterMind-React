@@ -12,9 +12,11 @@ const GameContainer = styled.div`
   );
   display: flex;
   flex-flow: column nowrap;
+
   align-content: center;
   justify-content: center;
   width: fit-content;
+  max-width: 100%;
   border-radius: 7px;
   padding: 5px;
   margin: 10px auto;

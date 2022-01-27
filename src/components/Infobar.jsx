@@ -11,14 +11,14 @@ import styled from "styled-components";
 
 // import { useEffect } from "react/cjs/react.production.min";
 
-const SidebarContainer = styled.div`
+const InfobarContainer = styled.div`
   display: flex;
   flex-flow: row nowrap;
   margin: 0 auto;
   justify-content: center;
   align-items: center;
-  border: 1px solid #ddafa2;
-  border-radius: 7px;
+  border-top: 1px solid #ddafa2;
+  // border-bottom: 1px solid #ddafa2;
   color: #ddafa2;
   padding: 10px;
   text-align: center;
@@ -26,7 +26,7 @@ const SidebarContainer = styled.div`
   font-size: 15px;
 `;
 
-const SidebarP = styled.div`
+const InfobarP = styled.div`
   display: flex;
   align-items: center;
   margin-right: 20px;
@@ -54,7 +54,7 @@ padding: 5px;
 cursor: pointer;
 `;
 
-export default function Sidebar() {
+export default function Infobar() {
   const [rows, setRows] = useRecoilState(numberOfRows);
   const [cols, setCols] = useRecoilState(numberOfColumns);
   const setAnswer = useSetRecoilState(MManswer);
@@ -70,8 +70,13 @@ export default function Sidebar() {
   }
 
   return (
-    <SidebarContainer>
-      <SidebarP>
+    <InfobarContainer
+      id="infobar"
+      onClick={(e) => {
+        console.log(e);
+      }}
+    >
+      <InfobarP>
         Rows: {rows}
         <CountChangeButton
           onClick={() => {
@@ -89,8 +94,8 @@ export default function Sidebar() {
         >
           ▼
         </CountChangeButton>
-      </SidebarP>
-      <SidebarP>
+      </InfobarP>
+      <InfobarP>
         Columns: {cols}
         <CountChangeButton
           onClick={() => {
@@ -110,8 +115,8 @@ export default function Sidebar() {
         >
           ▼
         </CountChangeButton>
-      </SidebarP>
-      <SidebarP>
+      </InfobarP>
+      <InfobarP>
         <GenerateAnswerButton
           onClick={() => {
             GenerateAnswer();
@@ -119,7 +124,7 @@ export default function Sidebar() {
         >
           Create Answer!
         </GenerateAnswerButton>
-      </SidebarP>
-    </SidebarContainer>
+      </InfobarP>
+    </InfobarContainer>
   );
 }

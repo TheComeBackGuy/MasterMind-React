@@ -2,6 +2,7 @@
   --darkGrey: #707070;
   --mmWhite: #ddafa2;
   --mmBrightWhite: #eaccc3;
+  --mmDarkRed: #310303;
 }
 
 body {
@@ -62,7 +63,6 @@ code {
   width: 50px;
   height: 50px;
   list-style-type: none;
-  background-image: url(./images/hole.gif);
   background-repeat: no-repeat;
   background-size: contain;
   /* border: 1px solid black; */
@@ -101,6 +101,9 @@ code {
   margin: 0 5px 5px 0;
 }
 
+.black {
+  background-image: url(./images/hole.gif);
+}
 .red {
   background-image: url("./images/marble-red.png");
   filter: drop-shadow(0 3mm 2mm #381111);

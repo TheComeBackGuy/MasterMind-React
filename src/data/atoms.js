@@ -29,3 +29,8 @@ export const activeGame = atom({
   key: "active-game",
   default: false,
 });
+
+export const gameTimerState = atom({
+  key: "game-timer-state",
+  default: "00:00",
+});
