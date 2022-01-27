@@ -1,7 +1,9 @@
 // import GameTimer from "./GameTimer";
 
 import React from "react";
+import { activeRow } from "../data/atoms";
 import styled from "styled-components";
+import { useRecoilValue } from "recoil";
 
 const LegendContainer = styled.div`
   width: 220px;
@@ -22,6 +24,7 @@ const LegendContainer = styled.div`
 `;
 
 export default function Legend() {
+  const row = useRecoilValue(activeRow);
   return (
     <LegendContainer>
       {/* <GameTimer /> */}
@@ -39,6 +42,9 @@ export default function Legend() {
       <h2>Legend</h2>
       <p>★ = Right color, right place </p>
       <p>☆ = Right color, wrong place </p>
+
+      <h2>Current Row</h2>
+      <p>{row}</p>
     </LegendContainer>
   );
 }

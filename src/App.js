@@ -22,6 +22,7 @@ import MarbleTracking from "./components/MarbleTracking";
 import TotalGrid from "./components/TotalGrid";
 import { generateDefaultRow } from "./utils/globalFunctions";
 import styled from "styled-components";
+import { useEffect } from "react";
 
 const FullGameContainer = styled.div`
   display: flex;
@@ -58,6 +59,18 @@ export default function App() {
   const cols = useRecoilValue(numberOfColumns);
   const marbles = useRecoilValue(listOfMarbles);
   // const [guessRow, setGuessRow] = useRecoilState(currentGuessRowState);
+
+  useEffect(() => {
+    if (activeRowNumber > 0) {
+      for (let i = 0; i < cols; i++) {
+        // console.log("hey " + i);
+        document
+          .getElementById(`r${activeRowNumber}c${i}`)
+          .classList.replace("black", `yellow`);
+        console.log(`r${activeRowNumber}c${i}`);
+      }
+    }
+  }, [activeRowNumber, cols]);
 
   //generates a random answer for this round based on the column length
   function GenerateAnswer() {
