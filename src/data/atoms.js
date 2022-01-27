@@ -7,7 +7,7 @@ export const MManswer = atom({
 
 export const numberOfRows = atom({
   key: "number-of-rows",
-  default: 10,
+  default: 12,
 });
 
 export const numberOfColumns = atom({
@@ -33,4 +33,9 @@ export const activeGame = atom({
 export const gameTimerState = atom({
   key: "game-timer-state",
   default: "00:00",
+});
+
+export const currentGameHistory = atom({
+  key: "current-game-state",
+  default: [],
 });

@@ -4,8 +4,10 @@ import {
   MManswer,
   activeGame,
   activeRow,
+  currentGameHistory,
   listOfMarbles,
   numberOfColumns,
+  numberOfRows,
 } from "./data/atoms";
 import {
   useRecoilState,
@@ -20,7 +22,6 @@ import Legend from "./components/Legend";
 import MarbleTracking from "./components/MarbleTracking";
 // import { CreateAnswer } from "./components/CreateAnswer";
 import TotalGrid from "./components/TotalGrid";
-import { generateDefaultRow } from "./utils/globalFunctions";
 import styled from "styled-components";
 import { useEffect } from "react";
 
@@ -54,10 +55,13 @@ const StartButton = styled.button`
 export default function App() {
   const [isGameActive, setIsGameActive] = useRecoilState(activeGame);
   const [activeRowNumber, setActiveRowNumber] = useRecoilState(activeRow);
-  const resetRows = useResetRecoilState(activeRow);
+  const resetRowNumber = useResetRecoilState(activeRow);
   const setAnswer = useSetRecoilState(MManswer);
   const cols = useRecoilValue(numberOfColumns);
+  const rows = useRecoilValue(numberOfRows);
   const marbles = useRecoilValue(listOfMarbles);
+  const resetGameHistory = useResetRecoilState(currentGameHistory);
+
   // const [guessRow, setGuessRow] = useRecoilState(currentGuessRowState);
 
   useEffect(() => {
@@ -67,6 +71,10 @@ export default function App() {
         document
           .getElementById(`r${activeRowNumber}c${i}`)
           .classList.replace("black", `yellow`);
+        document
+          .getElementById(`r${activeRowNumber}c${i}`)
+          .classList.add("marble");
+
         console.log(`r${activeRowNumber}c${i}`);
       }
     }
@@ -78,16 +86,32 @@ export default function App() {
     for (let i = 0; i < cols; i++) {
       tempAnswer.push(marbles[Math.floor(Math.random() * marbles.length)]);
     }
-    console.log(tempAnswer);
     setAnswer(tempAnswer);
+  }
+
+  function resetRowBackgrounds() {
+    for (let i = 1; i < rows; i++) {
+      console.log(`row ${i}`);
+
+      for (let j = 0; j < cols; j++) {
+        console.log(`col ${j}`);
+        document
+          .querySelector(`#r${i}c${j}`)
+          .classList.replace(
+            document.querySelector(`#r${i}c${j}`).classList[1],
+            "black"
+          );
+      }
+    }
   }
 
   //game logic at start
   function StartNewGame(e) {
-    //removes the customization bar
-    document.querySelector("#infobar").style.display = "none";
     //litghtswitch for game elements
     setIsGameActive(true);
+
+    //reset the move history
+    resetGameHistory();
 
     // document.getElementById("submitButton").style.display = "flex";
 
@@ -98,15 +122,23 @@ export default function App() {
     e.target.style.color = "var(--mmWhite";
     e.target.innerText = "Give Up";
 
-    //make board active
+    //Activates the first row
     setActiveRowNumber(1);
+    //removes the customization bar
+    document.querySelector("#infobar").style.display = "none";
+    document.querySelector("#submitButton").style.display = "flex";
 
-    generateDefaultRow(cols, activeRowNumber);
+    // generateDefaultRow(cols, activeRowNumber);
     // console.log("clear the board");
     // console.log("Start the timer");
     // console.log("Hide the answer");
   }
-  // document.getElementById("submitButton").style.display = "none";
+
+  function endGame() {
+    document.querySelector("#infobar").style.display = "none";
+    document.querySelector("#submitButton").style.display = "none";
+    resetRowNumber();
+  }
 
   return (
     <div>
@@ -128,6 +160,7 @@ export default function App() {
       <StartButton
         onClick={(e) => {
           if (isGameActive) {
+            endGame();
             console.log("Stop the timer");
             console.log("Show the answer");
             e.target.style.backgroundColor = "var(--mmWhite)";
@@ -135,12 +168,12 @@ export default function App() {
             e.target.innerText = "Start Game";
             setIsGameActive(!isGameActive);
           } else {
-            resetRows();
+            resetRowBackgrounds();
             StartNewGame(e);
           }
         }}
       >
-        Start Game
+        Start New Game
       </StartButton>
       <footer>
         Designed and developed by Dennis Hart based on Hasbro Game.

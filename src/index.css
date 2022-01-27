@@ -67,7 +67,6 @@ code {
   background-size: contain;
   /* border: 1px solid black; */
   margin: 5px;
-  border: 1px solid var(--darkGrey);
 }
 .marbleRow {
   display: flex;
@@ -101,28 +100,46 @@ code {
   margin: 0 5px 5px 0;
 }
 
+.answerBlack {
+  background-image: url(./images/black.png);
+
+  filter: drop-shadow(0 3mm 2mm #101010);
+}
+.marble {
+  background-size: 53px;
+  background-position: -2px -1px;
+  border: none;
+}
+
 .black {
   background-image: url(./images/hole.gif);
+  border: 1px solid var(--darkGrey);
 }
 .red {
   background-image: url("./images/marble-red.png");
+  background-size: fit-content;
   filter: drop-shadow(0 3mm 2mm #381111);
+  border: none;
 }
 .purple {
   background-image: url("./images/marble-purple.png");
   filter: drop-shadow(0 3mm 2mm #3f1d3b);
+  border: none;
 }
 .green {
   background-image: url("./images/marble-green.png");
   filter: drop-shadow(0 3mm 2mm #172a14);
+  border: none;
 }
 .yellow {
   background-image: url("./images/marble-yellow.png");
   filter: drop-shadow(0 3mm 2mm #3f3d1d);
+  border: none;
 }
 .blue {
   background-image: url("./images/marble-blue.png");
   filter: drop-shadow(0 3mm 2mm #17183f);
+  border: none;
 }
 
 footer {

@@ -1,7 +1,7 @@
 // import GameTimer from "./GameTimer";
 
 import React from "react";
-import { activeRow } from "../data/atoms";
+import { listOfMarbles } from "../data/atoms";
 import styled from "styled-components";
 import { useRecoilValue } from "recoil";
 
@@ -23,8 +23,20 @@ const LegendContainer = styled.div`
   }
 `;
 
+const MarbleIcon = styled.li`
+  display: inline-flex;
+  flex-flow: row nowrap;
+  list-style-type: none;
+  width: 15px;
+  height: 15px;
+  background-color: white;
+  border-radius: 50%;
+  margin: 5px;
+`;
+
 export default function Legend() {
-  const row = useRecoilValue(activeRow);
+  const bagofMarbles = useRecoilValue(listOfMarbles);
+
   return (
     <LegendContainer>
       {/* <GameTimer /> */}
@@ -43,8 +55,17 @@ export default function Legend() {
       <p>★ = Right color, right place </p>
       <p>☆ = Right color, wrong place </p>
 
-      <h2>Current Row</h2>
-      <p>{row}</p>
+      <h2>Available Colors</h2>
+      <ul>
+        {bagofMarbles.map((marble, index) => {
+          return (
+            <MarbleIcon
+              key={index}
+              style={{ backgroundColor: `${marble}` }}
+            ></MarbleIcon>
+          );
+        })}
+      </ul>
     </LegendContainer>
   );
 }

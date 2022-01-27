@@ -44,12 +44,6 @@ export default function RowOfButtons({ currentRow }) {
     }
   }
 
-  function handleButtonRollout(e, activeRowNow, currentRow) {
-    if (currentRow === activeRowNow && gameIsActive) {
-      e.target.style.border = "1px solid var(--darkGrey)";
-    }
-  }
-
   // `${answer[answer.indexOf(row)]}`;
 
   for (let i = 0; i < columns; i++) {
@@ -62,7 +56,6 @@ export default function RowOfButtons({ currentRow }) {
         onMouseOver={(e) => {
           handleButtonRollover(e, activeRowNow, currentRow);
         }}
-        onMouseLeave={(e) => handleButtonRollout(e, activeRowNow, currentRow)}
       >
         {/* r{currentRow}c{i} */}
       </button>
