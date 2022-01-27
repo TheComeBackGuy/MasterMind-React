@@ -106,8 +106,8 @@ code {
   filter: drop-shadow(0 3mm 2mm #101010);
 }
 .marble {
-  background-size: 53px;
-  background-position: -2px -1px;
+  background-size: 52px;
+  background-position: -1px -1px;
   border: none;
 }
 

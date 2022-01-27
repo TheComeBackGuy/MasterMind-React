@@ -1,11 +1,16 @@
 import {
   MManswer,
+  activeGame,
   activeRow,
   currentGameHistory,
   numberOfColumns,
-  numberOfRows,
 } from "../data/atoms";
-import { useRecoilState, useRecoilValue } from "recoil";
+import {
+  useRecoilState,
+  useRecoilValue,
+  useResetRecoilState,
+  useSetRecoilState,
+} from "recoil";
 
 import React from "react";
 import styled from "styled-components";
@@ -41,9 +46,9 @@ const SubmitAnswerButton = styled.button`
   border-radius: 25px;
   font-size: 40px;
   cursor: pointer;
-  background-color: var(--mmBrightWhite);
+  background-color: transparent;
   border: 1px solid var(--mmWhite);
-  color: var(--mmDarkRed);
+  color: var(--mmBrightWhite);
   :hover {
     border: 1px solid var(--mmDarkRed);
     background-color: var(--mmDarkRed);
@@ -62,14 +67,15 @@ const RowResult = styled.div`
 `;
 
 export default function MarbleTracking() {
-  const rows = useRecoilValue(numberOfRows);
   const cols = useRecoilValue(numberOfColumns);
   const [currentRow, setCurrentRow] = useRecoilState(activeRow);
-  const numberofAttempts = new Array(rows);
+  const resetRowNumber = useResetRecoilState(activeRow);
+  const setIsGameActive = useSetRecoilState(activeGame);
   const answer = useRecoilValue(MManswer);
   const [gameHistory, setGameHistory] = useRecoilState(currentGameHistory);
 
   let correctCount = 0;
+  let wrongSpaceCount = 0;
 
   function handleAnswerKeys(correctCount, currentGuess) {
     setGameHistory([
@@ -77,33 +83,70 @@ export default function MarbleTracking() {
       {
         answer: currentGuess,
         rightSpace: correctCount,
-        wrongSpace: 0,
+        wrongSpace: wrongSpaceCount,
       },
     ]);
   }
 
   function submitAnswer() {
     const currentGuess = [];
+    let answerMismatch = [];
+    let guessMismatch = [];
     //check for total answer
     for (let i = 0; i < cols; i++) {
+      const item = document.getElementById(`r${currentRow}c${i}`).classList[1];
       //push all entries into a temp array
-      currentGuess.push(
-        document.getElementById(`r${currentRow}c${i}`).classList[1]
-      );
+      currentGuess.push(item);
 
       //find absolute matches
-      if (
-        document.getElementById(`r${currentRow}c${i}`).classList[1] ===
-        answer[i]
-      ) {
+      if (item === answer[i]) {
         //increase the amount  of matches by 1
         correctCount++;
+      } else {
+        answerMismatch.push(answer[i]);
+        guessMismatch.push(item);
       }
     }
+    console.log(answer);
+    console.log("-----");
+    console.log("Guess is: ");
+    console.log(guessMismatch);
+
+    console.log("Answer is: ");
+    console.log(answerMismatch);
+
+    ///compare arrays for mismatches
+    for (let i = 0; i < guessMismatch.length; i++) {
+      for (let j = 0; j < guessMismatch.length; j++) {
+        console.log(
+          "comparing " + guessMismatch[i] + " with " + answerMismatch[j]
+        );
+        if (guessMismatch[i] === answerMismatch[j]) {
+          console.log(
+            "matched " +
+              guessMismatch[i] +
+              " and deleting " +
+              answerMismatch[j] +
+              " from answer."
+          );
+          answerMismatch.splice(j, 1);
+          console.log("Answer remains as: ");
+          console.log(answerMismatch);
+          wrongSpaceCount++;
+        }
+      }
+    }
+
     //detect a win
     if (correctCount === cols) {
-      console.log("you Win!");
+      const buttonSwitched = document.querySelector("#startButton");
+      buttonSwitched.style.backgroundColor = "var(--mmWhite)";
+      buttonSwitched.style.color = "var(--mmDarkRed)";
+      buttonSwitched.innerText = "Start Game";
+      resetRowNumber();
+      setIsGameActive(false);
     }
+
     // generateDefaultRow(cols, currentRow);
 
     //increase the row Number to move up the board
@@ -111,11 +154,8 @@ export default function MarbleTracking() {
 
     //send info to handleAnswerKeys to display
     handleAnswerKeys(correctCount, currentGuess);
-
-    console.log("determine correct stars");
   }
 
-  console.log(numberofAttempts);
   return (
     <ResultContainer>
       <SubmitAnswerButton id="submitButton" onClick={submitAnswer}>

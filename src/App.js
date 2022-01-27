@@ -55,6 +55,7 @@ const StartButton = styled.button`
 export default function App() {
   const [isGameActive, setIsGameActive] = useRecoilState(activeGame);
   const [activeRowNumber, setActiveRowNumber] = useRecoilState(activeRow);
+
   const resetRowNumber = useResetRecoilState(activeRow);
   const setAnswer = useSetRecoilState(MManswer);
   const cols = useRecoilValue(numberOfColumns);
@@ -65,7 +66,7 @@ export default function App() {
   // const [guessRow, setGuessRow] = useRecoilState(currentGuessRowState);
 
   useEffect(() => {
-    if (activeRowNumber > 0) {
+    if (activeRowNumber > 0 && isGameActive) {
       for (let i = 0; i < cols; i++) {
         // console.log("hey " + i);
         document
@@ -75,10 +76,10 @@ export default function App() {
           .getElementById(`r${activeRowNumber}c${i}`)
           .classList.add("marble");
 
-        console.log(`r${activeRowNumber}c${i}`);
+        // console.log(`r${activeRowNumber}c${i}`);
       }
     }
-  }, [activeRowNumber, cols]);
+  }, [activeRowNumber, cols, isGameActive]);
 
   //generates a random answer for this round based on the column length
   function GenerateAnswer() {
@@ -91,10 +92,10 @@ export default function App() {
 
   function resetRowBackgrounds() {
     for (let i = 1; i < rows; i++) {
-      console.log(`row ${i}`);
+      // console.log(`row ${i}`);
 
       for (let j = 0; j < cols; j++) {
-        console.log(`col ${j}`);
+        // console.log(`col ${j}`);
         document
           .querySelector(`#r${i}c${j}`)
           .classList.replace(
@@ -126,6 +127,7 @@ export default function App() {
     setActiveRowNumber(1);
     //removes the customization bar
     document.querySelector("#infobar").style.display = "none";
+    //shows the submit button
     document.querySelector("#submitButton").style.display = "flex";
 
     // generateDefaultRow(cols, activeRowNumber);
@@ -158,15 +160,16 @@ export default function App() {
         </div>
       </FullGameContainer>
       <StartButton
+        id="startButton"
         onClick={(e) => {
           if (isGameActive) {
             endGame();
-            console.log("Stop the timer");
-            console.log("Show the answer");
+            setIsGameActive(false);
+            // console.log("Stop the timer");
+            // console.log("Show the answer");
             e.target.style.backgroundColor = "var(--mmWhite)";
             e.target.style.color = "var(--mmDarkRed)";
             e.target.innerText = "Start Game";
-            setIsGameActive(!isGameActive);
           } else {
             resetRowBackgrounds();
             StartNewGame(e);

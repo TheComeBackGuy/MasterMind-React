@@ -16,7 +16,7 @@ export default function AnswerRow() {
               <button
                 key={`${answer[answer.indexOf(row)]}-${Math.random() * 15000}`}
                 id={`${answer[answer.indexOf(row)]}`}
-                className={`hole ${answer[answer.indexOf(row)]}`}
+                className={`hole ${answer[answer.indexOf(row)]} marble`}
               ></button>
             );
           })}
