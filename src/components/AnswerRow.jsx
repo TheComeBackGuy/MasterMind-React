@@ -1,5 +1,3 @@
-import { handleButton, handleButtonRollover } from "../utils/globalFunctions";
-
 import { MManswer } from "../data/atoms";
 import React from "react";
 import { useRecoilValue } from "recoil";
