@@ -3,20 +3,23 @@ import { MManswer, activeGame } from "../data/atoms";
 import React from "react";
 import { useRecoilValue } from "recoil";
 
+// import { numberOfColumns } from "../data/atoms";
+
 export default function AnswerRow() {
   const answer = useRecoilValue(MManswer);
   const gameIsActive = useRecoilValue(activeGame);
+  // const cols = useRecoilValue(numberOfColumns);
 
   function showAnswer() {
     if (!gameIsActive) {
       return (
         <ul id={`answer`} className="marbleRow">
-          {answer.map((row) => {
+          {answer.map((col) => {
             return (
               <button
-                key={`${answer[answer.indexOf(row)]}-${Math.random() * 15000}`}
-                id={`${answer[answer.indexOf(row)]}`}
-                className={`hole ${answer[answer.indexOf(row)]} marble`}
+                key={`${answer[answer.indexOf(col)]}-${Math.random() * 15000}`}
+                id={`${answer[answer.indexOf(col)]}`}
+                className={`hole ${answer[answer.indexOf(col)]} marble`}
               ></button>
             );
           })}
@@ -25,11 +28,11 @@ export default function AnswerRow() {
     } else {
       return (
         <ul id={`answer`} className="marbleRow">
-          {answer.map((row) => {
+          {answer.map((col) => {
             return (
               <button
-                key={`${answer[answer.indexOf(row)]}-${Math.random() * 15000}`}
-                id={`${answer[answer.indexOf(row)]}`}
+                key={`${answer[answer.indexOf(col)]}-${Math.random() * 15000}`}
+                id={`${answer[answer.indexOf(col)]}`}
                 className={`hole answerBlack marble`}
               ></button>
             );

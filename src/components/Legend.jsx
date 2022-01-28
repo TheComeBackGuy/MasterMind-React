@@ -14,7 +14,9 @@ const LegendContainer = styled.div`
   color: #ddafa2;
   padding: 10px;
   text-align: center;
-  filter: drop-shadow(0 1mm 1mm black);
+  // filter: drop-shadow(0 1mm 1mm black);
+  background-color: var(--mmDarkRedShade);
+  border-radius: 10px;
   //   border: 1px solid white;
   font-size: 15px;
   & > h2 {

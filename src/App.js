@@ -66,7 +66,7 @@ export default function App() {
   // const [guessRow, setGuessRow] = useRecoilState(currentGuessRowState);
 
   useEffect(() => {
-    if (activeRowNumber > 0 && isGameActive) {
+    if (activeRowNumber > 0 && activeRowNumber <= rows && isGameActive) {
       for (let i = 0; i < cols; i++) {
         // console.log("hey " + i);
         document
@@ -79,7 +79,7 @@ export default function App() {
         // console.log(`r${activeRowNumber}c${i}`);
       }
     }
-  }, [activeRowNumber, cols, isGameActive]);
+  }, [activeRowNumber, cols, rows, isGameActive]);
 
   //generates a random answer for this round based on the column length
   function GenerateAnswer() {
@@ -91,7 +91,7 @@ export default function App() {
   }
 
   function resetRowBackgrounds() {
-    for (let i = 1; i < rows; i++) {
+    for (let i = 1; i <= rows; i++) {
       // console.log(`row ${i}`);
 
       for (let j = 0; j < cols; j++) {
@@ -147,6 +147,7 @@ export default function App() {
       <header>
         <h1>MASTERMIND</h1>
       </header>
+
       <Infobar />
       <FullGameContainer>
         <div>

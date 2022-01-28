@@ -3,6 +3,7 @@
   --mmWhite: #ddafa2;
   --mmBrightWhite: #eaccc3;
   --mmDarkRed: #310303;
+  --mmDarkRedShade: rgba(49, 3, 3, 0.65);
 }
 
 body {
@@ -21,11 +22,6 @@ body {
 h1 {
   color: white;
   font-size: 60px;
-}
-
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
-    monospace;
 }
 
 * {

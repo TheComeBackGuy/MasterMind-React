@@ -1,9 +1,12 @@
+import "../index.css";
+
 import {
   MManswer,
   activeGame,
   activeRow,
   currentGameHistory,
   numberOfColumns,
+  numberOfRows,
 } from "../data/atoms";
 import {
   useRecoilState,
@@ -57,17 +60,19 @@ const SubmitAnswerButton = styled.button`
 `;
 const RowResult = styled.div`
   margin-bottom: 10px;
-  width: 100%;
+  width: 50px;
   height: 50px;
   // border: 1px solid var(--mmBrightWhite);
   border-radius: 7px;
   color: var(--mmBrightWhite);
   text-align: left;
   padding: 5px;
+  background-color: var(--mmDarkRedShade);
 `;
 
 export default function MarbleTracking() {
   const cols = useRecoilValue(numberOfColumns);
+  const rows = useRecoilValue(numberOfRows);
   const [currentRow, setCurrentRow] = useRecoilState(activeRow);
   const resetRowNumber = useResetRecoilState(activeRow);
   const setIsGameActive = useSetRecoilState(activeGame);
@@ -129,13 +134,16 @@ export default function MarbleTracking() {
               answerMismatch[j] +
               " from answer."
           );
-          answerMismatch.splice(j, 1);
+          answerMismatch.splice(j, 1, null);
           console.log("Answer remains as: ");
           console.log(answerMismatch);
           wrongSpaceCount++;
+          break;
         }
       }
     }
+
+    // if (activeRow)
 
     //detect a win
     if (correctCount === cols) {
@@ -149,11 +157,23 @@ export default function MarbleTracking() {
 
     // generateDefaultRow(cols, currentRow);
 
-    //increase the row Number to move up the board
-    setCurrentRow(currentRow + 1);
+    if (currentRow === rows) {
+      const buttonSwitched = document.querySelector("#startButton");
+      buttonSwitched.style.backgroundColor = "var(--mmWhite)";
+      buttonSwitched.style.color = "var(--mmDarkRed)";
+      buttonSwitched.innerText = "Start Game";
+      document.querySelector("#submitButton").style.display = "none";
+      //send info to handleAnswerKeys to displaygit
+      handleAnswerKeys(correctCount, currentGuess);
+      resetRowNumber();
+      setIsGameActive(false);
+    } else {
+      //increase the row Number to move up the board
+      setCurrentRow(currentRow + 1);
 
-    //send info to handleAnswerKeys to display
-    handleAnswerKeys(correctCount, currentGuess);
+      //send info to handleAnswerKeys to displaygit
+      handleAnswerKeys(correctCount, currentGuess);
+    }
   }
 
   return (
