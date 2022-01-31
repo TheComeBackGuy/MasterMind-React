@@ -147,22 +147,12 @@ export default function MarbleTracking() {
 
     //detect a win
     if (correctCount === cols) {
-      const buttonSwitched = document.querySelector("#startButton");
-      buttonSwitched.style.backgroundColor = "var(--mmWhite)";
-      buttonSwitched.style.color = "var(--mmDarkRed)";
-      buttonSwitched.innerText = "Start Game";
-      resetRowNumber();
       setIsGameActive(false);
     }
 
     // generateDefaultRow(cols, currentRow);
 
     if (currentRow === rows) {
-      const buttonSwitched = document.querySelector("#startButton");
-      buttonSwitched.style.backgroundColor = "var(--mmWhite)";
-      buttonSwitched.style.color = "var(--mmDarkRed)";
-      buttonSwitched.innerText = "Start Game";
-      document.querySelector("#submitButton").style.display = "none";
       //send info to handleAnswerKeys to displaygit
       handleAnswerKeys(correctCount, currentGuess);
       resetRowNumber();

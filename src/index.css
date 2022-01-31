@@ -22,6 +22,7 @@ body {
 h1 {
   color: white;
   font-size: 60px;
+  border-bottom: 1px solid var(--mmWhite);
 }
 
 * {
@@ -50,7 +51,7 @@ h1 {
   width: fit-content;
   border-radius: 7px;
   padding: 5px;
-  filter: drop-shadow(0 5mm 2mm black);
+  /* filter: drop-shadow(0 5mm 2mm black); */
 }
 
 .hole {

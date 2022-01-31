@@ -66,20 +66,52 @@ export default function App() {
   // const [guessRow, setGuessRow] = useRecoilState(currentGuessRowState);
 
   useEffect(() => {
+    //adds default yellow line of marbles at game start
     if (activeRowNumber > 0 && activeRowNumber <= rows && isGameActive) {
       for (let i = 0; i < cols; i++) {
-        // console.log("hey " + i);
         document
           .getElementById(`r${activeRowNumber}c${i}`)
           .classList.replace("black", `yellow`);
         document
           .getElementById(`r${activeRowNumber}c${i}`)
           .classList.add("marble");
-
-        // console.log(`r${activeRowNumber}c${i}`);
       }
     }
   }, [activeRowNumber, cols, rows, isGameActive]);
+
+  //enable/disable objects based on if the user is playing
+  useEffect(() => {
+    if (isGameActive) {
+      //game is active
+      // console.log(document.querySelector("#footer").position);
+      document.querySelector("#infobar").style.display = "none";
+      // document.querySelector("#infobar").style.color = "var(--mmDarkRedShade)";
+      // document.querySelectorAll("#difficulty").forEach((child) => {
+      //   child.theme = "annoying";
+      // });
+      console.log(document.querySelector("#difficulty"));
+      console.log(document.querySelectorAll("#changeCount"));
+    } else {
+      //game is not active
+      document.querySelector("#infobar").style.color = "var(--mmWhite)";
+      document.querySelector("#infobar").style.display = "flex";
+
+      document.querySelectorAll("#changeCount").forEach((child) => {
+        child.disabled = false;
+        // child.style.filter = "none";
+        child.style.backgroundColor = "var(--mmWhite)";
+      });
+
+      const buttonSwitched = document.querySelector("#startButton");
+      buttonSwitched.style.backgroundColor = "var(--mmWhite)";
+      buttonSwitched.style.color = "var(--mmDarkRed)";
+      buttonSwitched.innerText = "Start Game";
+
+      document.querySelector("#submitButton").style.display = "none";
+
+      resetRowNumber();
+    }
+  }, [isGameActive, resetRowNumber]);
 
   //generates a random answer for this round based on the column length
   function GenerateAnswer() {
@@ -126,7 +158,6 @@ export default function App() {
     //Activates the first row
     setActiveRowNumber(1);
     //removes the customization bar
-    document.querySelector("#infobar").style.display = "none";
     //shows the submit button
     document.querySelector("#submitButton").style.display = "flex";
 
@@ -136,11 +167,12 @@ export default function App() {
     // console.log("Hide the answer");
   }
 
-  function endGame() {
-    document.querySelector("#infobar").style.display = "none";
-    document.querySelector("#submitButton").style.display = "none";
-    resetRowNumber();
-  }
+  // function endGame() {
+  //   // document.querySelector("#infobar").style.display = "none";
+  //   // document.querySelector("#submitButton").style.display = "none";
+  //   resetRowNumber();
+  //   // setIsGameActive(false);
+  // }
 
   return (
     <div>
@@ -164,7 +196,7 @@ export default function App() {
         id="startButton"
         onClick={(e) => {
           if (isGameActive) {
-            endGame();
+            // endGame();
             setIsGameActive(false);
             // console.log("Stop the timer");
             // console.log("Show the answer");
@@ -179,7 +211,7 @@ export default function App() {
       >
         Start New Game
       </StartButton>
-      <footer>
+      <footer id="footer">
         Designed and developed by Dennis Hart based on Hasbro Game.
       </footer>
     </div>

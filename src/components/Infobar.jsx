@@ -36,14 +36,30 @@ const InfobarP = styled.div`
   }
 `;
 
-const GenerateAnswerButton = styled.button`
+const InfobarButton = styled.button`
+  background-color: ${(props) => props.theme.bg};
+  color: var(--mmDarkRed);
+  padding: 5px;
   border: none;
-  border-radius: 3px;
-  background-color: var(--mmWhite);
-  color: #350101;
-  padding: 3px;
-  cursor: pointer;
+  margin-left: 10px;
+  border-radius: 4px;
 `;
+
+InfobarButton.defaultProps = {
+  theme: { bg: "var(--mmWhite)" },
+};
+
+const annoying = {
+  bg: "green",
+};
+// const GenerateAnswerButton = styled.button`
+//   border: none;
+//   border-radius: 3px;
+//   background-color: var(--mmWhite);
+//   color: #350101;
+//   padding: 3px;
+//   cursor: pointer;
+// `;
 
 const CountChangeButton = styled.button`
 margin: 3px;
@@ -76,9 +92,40 @@ export default function Infobar() {
         console.log(e);
       }}
     >
-      <InfobarP>
+      <InfobarButton
+        theme={null}
+        id="difficulty"
+        onClick={() => {
+          setRows(12);
+          setCols(4);
+        }}
+      >
+        Classic
+      </InfobarButton>{" "}
+      <InfobarButton
+        theme={null}
+        id="difficulty"
+        onClick={() => {
+          setRows(14);
+          setCols(6);
+        }}
+      >
+        Hard
+      </InfobarButton>
+      <InfobarButton
+        theme={null}
+        id="difficulty"
+        onClick={() => {
+          setRows(16);
+          setCols(10);
+        }}
+      >
+        Why?!
+      </InfobarButton>
+      {/* <InfobarP>
         Rows: {rows}
         <CountChangeButton
+          id="changeCount"
           onClick={() => {
             setRows(rows + 1);
           }}
@@ -86,6 +133,7 @@ export default function Infobar() {
           ▲
         </CountChangeButton>
         <CountChangeButton
+          id="changeCount"
           onClick={() => {
             if (rows > 5) {
               setRows(rows - 1);
@@ -98,6 +146,7 @@ export default function Infobar() {
       <InfobarP>
         Columns: {cols}
         <CountChangeButton
+          id="changeCount"
           onClick={() => {
             setCols(cols + 1);
             GenerateAnswer();
@@ -106,6 +155,7 @@ export default function Infobar() {
           ▲
         </CountChangeButton>
         <CountChangeButton
+          id="changeCount"
           onClick={() => {
             if (cols > 4) {
               setCols(cols - 1);
@@ -117,14 +167,14 @@ export default function Infobar() {
         </CountChangeButton>
       </InfobarP>
       <InfobarP>
-        <GenerateAnswerButton
+        {/* <GenerateAnswerButton
           onClick={() => {
             GenerateAnswer();
           }}
         >
           Create Answer!
-        </GenerateAnswerButton>
-      </InfobarP>
+        </GenerateAnswerButton> */}
+      {/* </InfobarP> */}
     </InfobarContainer>
   );
 }
