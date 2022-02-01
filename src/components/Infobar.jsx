@@ -1,13 +1,8 @@
-import {
-  MManswer,
-  listOfMarbles,
-  numberOfColumns,
-  numberOfRows,
-} from "../data/atoms";
-import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
+import { numberOfColumns, numberOfRows } from "../data/atoms";
 
 import React from "react";
 import styled from "styled-components";
+import { useSetRecoilState } from "recoil";
 
 // import { useEffect } from "react/cjs/react.production.min";
 
@@ -26,15 +21,15 @@ const InfobarContainer = styled.div`
   font-size: 15px;
 `;
 
-const InfobarP = styled.div`
-  display: flex;
-  align-items: center;
-  margin-right: 20px;
-  // border: 1px solid green;
-  &:last-child {
-    margin-right: 0;
-  }
-`;
+// const InfobarP = styled.div`
+//   display: flex;
+//   align-items: center;
+//   margin-right: 20px;
+//   // border: 1px solid green;
+//   &:last-child {
+//     margin-right: 0;
+//   }
+// `;
 
 const InfobarButton = styled.button`
   background-color: ${(props) => props.theme.bg};
@@ -49,9 +44,9 @@ InfobarButton.defaultProps = {
   theme: { bg: "var(--mmWhite)" },
 };
 
-const annoying = {
-  bg: "green",
-};
+// const annoying = {
+//   bg: "green",
+// };
 // const GenerateAnswerButton = styled.button`
 //   border: none;
 //   border-radius: 3px;
@@ -61,29 +56,29 @@ const annoying = {
 //   cursor: pointer;
 // `;
 
-const CountChangeButton = styled.button`
-margin: 3px;
-border:none;
-border:radius: 3px;
-background-color: var(--mmWhite);
-padding: 5px;
-cursor: pointer;
-`;
+// const CountChangeButton = styled.button`
+// margin: 3px;
+// border:none;
+// border:radius: 3px;
+// background-color: var(--mmWhite);
+// padding: 5px;
+// cursor: pointer;
+// `;
 
 export default function Infobar() {
-  const [rows, setRows] = useRecoilState(numberOfRows);
-  const [cols, setCols] = useRecoilState(numberOfColumns);
-  const setAnswer = useSetRecoilState(MManswer);
-  const marbles = useRecoilValue(listOfMarbles);
+  const setRows = useSetRecoilState(numberOfRows);
+  const setCols = useSetRecoilState(numberOfColumns);
+  // const setAnswer = useSetRecoilState(MManswer);
+  // const marbles = useRecoilValue(listOfMarbles);
 
-  function GenerateAnswer() {
-    let tempAnswer = [];
-    for (let i = 0; i < cols; i++) {
-      tempAnswer.push(marbles[Math.floor(Math.random() * marbles.length)]);
-    }
-    console.log(tempAnswer);
-    setAnswer(tempAnswer);
-  }
+  // function GenerateAnswer() {
+  //   let tempAnswer = [];
+  //   for (let i = 0; i < cols; i++) {
+  //     tempAnswer.push(marbles[Math.floor(Math.random() * marbles.length)]);
+  //   }
+  //   console.log(tempAnswer);
+  //   setAnswer(tempAnswer);
+  // }
 
   return (
     <InfobarContainer
