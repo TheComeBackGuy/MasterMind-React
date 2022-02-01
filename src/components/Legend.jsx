@@ -50,7 +50,7 @@ export default function Legend() {
       <h2>How To Play</h2>
       <p>
         Tap each marble to cycle through the colors. When you've changed them to
-        your liking, Press "Submit Answer"
+        your liking, Press "✔"
       </p>
 
       <h2>Legend</h2>
