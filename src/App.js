@@ -5,6 +5,7 @@ import {
   activeGame,
   activeRow,
   currentGameHistory,
+  displayPopUp,
   listOfMarbles,
   numberOfColumns,
   numberOfRows,
@@ -19,10 +20,10 @@ import {
 import { AiOutlineCloseCircle } from "react-icons/ai";
 import { BiCog } from "react-icons/bi";
 import { BsQuestionCircle } from "react-icons/bs";
+import MarbleTracking from "./components/MarbleTracking";
 // import { GenerateAnswer } from "./components/Infobar";
 // import Infobar from "./components/Infobar";
-import Legend from "./components/Legend";
-import MarbleTracking from "./components/MarbleTracking";
+import SwitchPopup from "./components/SwitchPopup";
 // import { CreateAnswer } from "./components/CreateAnswer";
 import TotalGrid from "./components/TotalGrid";
 import styled from "styled-components";
@@ -63,13 +64,24 @@ const PopUpContainer = styled.div`
 `;
 
 const PopUpMessage = styled.div`
-  width: fit-content;
-  // margin: auto;
-  // background-color: var(--mmDarkRed);
-  z-index: 101;
-  border-radius: 5px;
+  width: 220px;
+  display: flex;
+  flex-flow: column nowrap;
+  margin: 0px 20px;
+  align-items: center;
+  color: #ddafa2;
   padding: 10px;
-  color: var(--mmWhite);
+  text-align: center;
+  // filter: drop-shadow(0 1mm 1mm black);
+  background-color: var(--mmDarkRedShade);
+  border-radius: 10px;
+  //   border: 1px solid white;
+  font-size: 15px;
+  & > h2 {
+    border-bottom: 1px solid var(--mmWhite);
+    margin: 20px 0 10px 0;
+  }
+  z-index: 101;
 `;
 
 const BlackLayer = styled.div`
@@ -83,9 +95,10 @@ const BlackLayer = styled.div`
   z-index: 100;
 `;
 const CloseWindowContainer = styled.div`
+  width: 100%;
   // border: 1px solid yellow;
   text-align: right;
-  margin: 0 5px -30px 0;
+  margin: 0 0px -30px 0;
 `;
 const CloseWindowButton = styled.button`
   font-size: 40px;
@@ -93,6 +106,7 @@ const CloseWindowButton = styled.button`
   color: var(--mmWhite);
   border: none;
   cursor: pointer;
+  margin: -30px 0 0 0;
 `;
 const StartButton = styled.button`
   // color: green;
@@ -142,6 +156,7 @@ export default function App() {
   const rows = useRecoilValue(numberOfRows);
   const marbles = useRecoilValue(listOfMarbles);
   const resetGameHistory = useResetRecoilState(currentGameHistory);
+  const [popUp, setPopUp] = useRecoilState(displayPopUp);
 
   // const [guessRow, setGuessRow] = useRecoilState(currentGuessRowState);
 
@@ -163,22 +178,12 @@ export default function App() {
   useEffect(() => {
     if (isGameActive) {
       //game is active
-      // console.log(document.querySelector("#footer").position);
-      // document.querySelector("#infobar").style.display = "none";
-      // document.querySelector("#infobar").style.color = "var(--mmDarkRedShade)";
-      // document.querySelectorAll("#difficulty").forEach((child) => {
-      //   child.theme = "annoying";
-      // });
       console.log(document.querySelector("#difficulty"));
       console.log(document.querySelectorAll("#changeCount"));
     } else {
-      //game is not active
-      // document.querySelector("#infobar").style.color = "var(--mmWhite)";
-      // document.querySelector("#infobar").style.display = "flex";
-
+      //game is inactive
       document.querySelectorAll("#changeCount").forEach((child) => {
         child.disabled = false;
-        // child.style.filter = "none";
         child.style.backgroundColor = "var(--mmWhite)";
       });
 
@@ -192,6 +197,14 @@ export default function App() {
       resetRowNumber();
     }
   }, [isGameActive, resetRowNumber]);
+
+  useEffect(() => {
+    if (popUp === true) {
+      document.querySelector("#popupDisplay").style.display = "flex";
+    } else {
+      document.querySelector("#popupDisplay").style.display = "none";
+    }
+  }, [popUp]);
 
   //generates a random answer for this round based on the column length
   function GenerateAnswer() {
@@ -256,24 +269,35 @@ export default function App() {
 
   return (
     <div>
-      {/* <PopUpContainer>
+      {/* this container is a popup for rules, settings, and history */}
+      <PopUpContainer id="popupDisplay">
         <PopUpMessage>
           <CloseWindowContainer>
-            <CloseWindowButton>
+            <CloseWindowButton
+              onClick={() => {
+                setPopUp(false);
+              }}
+            >
               <AiOutlineCloseCircle />
             </CloseWindowButton>
           </CloseWindowContainer>
-          <Legend />
+          {/* Space where content is loaded in  */}
+          <SwitchPopup content="rules" />
         </PopUpMessage>
         <BlackLayer></BlackLayer>
-      </PopUpContainer> */}
+      </PopUpContainer>
 
       <Header>
-        <InfobarButton>
+        <InfobarButton
+          id="rules"
+          onClick={() => {
+            setPopUp(true);
+          }}
+        >
           <BsQuestionCircle />
         </InfobarButton>
         <h1>MASTERMIND</h1>
-        <InfobarButton>
+        <InfobarButton id="settings">
           <BiCog />
         </InfobarButton>
       </Header>

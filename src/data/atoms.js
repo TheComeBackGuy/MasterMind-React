@@ -39,3 +39,8 @@ export const currentGameHistory = atom({
   key: "current-game-state",
   default: [],
 });
+
+export const displayPopUp = atom({
+  key: "display-popup",
+  default: false,
+});
