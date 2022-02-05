@@ -1,13 +1,16 @@
-import { numberOfColumns, numberOfRows } from "../data/atoms";
+// import { numberOfColumns, numberOfRows } from "../data/atoms";
 
+import { BiCog } from "react-icons/bi";
+import { BsQuestionCircle } from "react-icons/bs";
 import React from "react";
 import styled from "styled-components";
-import { useSetRecoilState } from "recoil";
+
+// import { useSetRecoilState } from "recoil";
 
 // import { useEffect } from "react/cjs/react.production.min";
 
 const InfobarContainer = styled.div`
-  display: flex;
+  display: none;
   flex-flow: row nowrap;
   margin: 0 auto;
   justify-content: center;
@@ -17,8 +20,9 @@ const InfobarContainer = styled.div`
   color: #ddafa2;
   padding: 10px;
   text-align: center;
-  filter: drop-shadow(0 1mm 1mm black);
+  // filter: drop-shadow(0 1mm 1mm black);
   font-size: 15px;
+  border: 1px solid yellow;
 `;
 
 // const InfobarP = styled.div`
@@ -31,43 +35,48 @@ const InfobarContainer = styled.div`
 //   }
 // `;
 
-const InfobarButton = styled.button`
-  background-color: ${(props) => props.theme.bg};
-  color: var(--mmDarkRed);
-  padding: 5px;
+const DifficultyDropDown = styled.div`
+  display: flex;
+  flex-flow: column nowrap;
+  margin: 0px 20px;
+  align-items: center;
+  color: #ddafa2;
+  padding: 10px;
+  text-align: center;
+  background-color: var(--mmDarkRedShade);
+  border-radius: 10px;
   border: none;
-  margin-left: 10px;
-  border-radius: 4px;
+  cursor: pointer;
+`;
+
+const InfobarButton = styled.button`
+  display: flex;
+  flex-flow: column nowrap;
+  margin: 0px 20px;
+  align-items: center;
+  color: #ddafa2;
+  padding: 10px;
+  text-align: center;
+  // filter: drop-shadow(0 1mm 1mm black);
+  background-color: var(--mmDarkRedShade);
+  // border-radius: 10px;
+  border: none;
+  border-radius: 5px;
+  font-size: 20px;
+  cursor: pointer;
 `;
 
 InfobarButton.defaultProps = {
   theme: { bg: "var(--mmWhite)" },
 };
 
-// const annoying = {
-//   bg: "green",
-// };
-// const GenerateAnswerButton = styled.button`
-//   border: none;
-//   border-radius: 3px;
-//   background-color: var(--mmWhite);
-//   color: #350101;
-//   padding: 3px;
-//   cursor: pointer;
-// `;
-
-// const CountChangeButton = styled.button`
-// margin: 3px;
-// border:none;
-// border:radius: 3px;
-// background-color: var(--mmWhite);
-// padding: 5px;
-// cursor: pointer;
-// `;
+DifficultyDropDown.defaultProps = {
+  theme: { bg: "var(--mmWhite)" },
+};
 
 export default function Infobar() {
-  const setRows = useSetRecoilState(numberOfRows);
-  const setCols = useSetRecoilState(numberOfColumns);
+  // const setRows = useSetRecoilState(numberOfRows);
+  // const setCols = useSetRecoilState(numberOfColumns);
   // const setAnswer = useSetRecoilState(MManswer);
   // const marbles = useRecoilValue(listOfMarbles);
 
@@ -87,36 +96,14 @@ export default function Infobar() {
         console.log(e);
       }}
     >
-      <InfobarButton
-        theme={null}
-        id="difficulty"
-        onClick={() => {
-          setRows(12);
-          setCols(4);
-        }}
-      >
-        Classic
-      </InfobarButton>{" "}
-      <InfobarButton
-        theme={null}
-        id="difficulty"
-        onClick={() => {
-          setRows(14);
-          setCols(6);
-        }}
-      >
-        Hard
+      <InfobarButton>
+        <BsQuestionCircle />
       </InfobarButton>
-      <InfobarButton
-        theme={null}
-        id="difficulty"
-        onClick={() => {
-          setRows(16);
-          setCols(10);
-        }}
-      >
-        Why?!
+      <InfobarButton>
+        <BiCog />
       </InfobarButton>
+
+      {/* some old code to change rows.cols with arrow buttons */}
       {/* <InfobarP>
         Rows: {rows}
         <CountChangeButton

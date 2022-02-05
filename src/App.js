@@ -16,8 +16,11 @@ import {
   useSetRecoilState,
 } from "recoil";
 
+import { AiOutlineCloseCircle } from "react-icons/ai";
+import { BiCog } from "react-icons/bi";
+import { BsQuestionCircle } from "react-icons/bs";
 // import { GenerateAnswer } from "./components/Infobar";
-import Infobar from "./components/Infobar";
+// import Infobar from "./components/Infobar";
 import Legend from "./components/Legend";
 import MarbleTracking from "./components/MarbleTracking";
 // import { CreateAnswer } from "./components/CreateAnswer";
@@ -37,6 +40,60 @@ const FullGameContainer = styled.div`
   }
 `;
 
+const Header = styled.header`
+  justify-self: center;
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: center;
+  align-items: baseline;
+  margin: 0 auto;
+  border-bottom: 1px solid var(--mmWhite);
+`;
+
+const PopUpContainer = styled.div`
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+`;
+
+const PopUpMessage = styled.div`
+  width: fit-content;
+  // margin: auto;
+  // background-color: var(--mmDarkRed);
+  z-index: 101;
+  border-radius: 5px;
+  padding: 10px;
+  color: var(--mmWhite);
+`;
+
+const BlackLayer = styled.div`
+  position: absolute;
+  top: 0;
+  left: 0;
+
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.65);
+  z-index: 100;
+`;
+const CloseWindowContainer = styled.div`
+  // border: 1px solid yellow;
+  text-align: right;
+  margin: 0 5px -30px 0;
+`;
+const CloseWindowButton = styled.button`
+  font-size: 40px;
+  background-color: transparent;
+  color: var(--mmWhite);
+  border: none;
+  cursor: pointer;
+`;
 const StartButton = styled.button`
   // color: green;
   width: 100%;
@@ -50,6 +107,23 @@ const StartButton = styled.button`
     background-color: var(--mmBrightWhite);
     transition: 0.25s ease-in-out;
   }
+`;
+
+const InfobarButton = styled.button`
+  display: flex;
+  flex-flow: column nowrap;
+  margin: 0px 20px;
+  align-items: center;
+  color: #ddafa2;
+  padding: 10px;
+  text-align: center;
+  // filter: drop-shadow(0 1mm 1mm black);
+  background-color: var(--mmDarkRedShade);
+  // border-radius: 10px;
+  border: none;
+  border-radius: 5px;
+  font-size: 20px;
+  cursor: pointer;
 `;
 
 export default function App() {
@@ -84,7 +158,7 @@ export default function App() {
     if (isGameActive) {
       //game is active
       // console.log(document.querySelector("#footer").position);
-      document.querySelector("#infobar").style.display = "none";
+      // document.querySelector("#infobar").style.display = "none";
       // document.querySelector("#infobar").style.color = "var(--mmDarkRedShade)";
       // document.querySelectorAll("#difficulty").forEach((child) => {
       //   child.theme = "annoying";
@@ -93,8 +167,8 @@ export default function App() {
       console.log(document.querySelectorAll("#changeCount"));
     } else {
       //game is not active
-      document.querySelector("#infobar").style.color = "var(--mmWhite)";
-      document.querySelector("#infobar").style.display = "flex";
+      // document.querySelector("#infobar").style.color = "var(--mmWhite)";
+      // document.querySelector("#infobar").style.display = "flex";
 
       document.querySelectorAll("#changeCount").forEach((child) => {
         child.disabled = false;
@@ -176,11 +250,28 @@ export default function App() {
 
   return (
     <div>
-      <header>
+      <PopUpContainer>
+        <PopUpMessage>
+          <CloseWindowContainer>
+            <CloseWindowButton>
+              <AiOutlineCloseCircle />
+            </CloseWindowButton>
+          </CloseWindowContainer>
+          <Legend />
+        </PopUpMessage>
+        <BlackLayer></BlackLayer>
+      </PopUpContainer>
+      <Header>
+        <InfobarButton>
+          <BsQuestionCircle />
+        </InfobarButton>
         <h1>MASTERMIND</h1>
-      </header>
+        <InfobarButton>
+          <BiCog />
+        </InfobarButton>
+      </Header>
 
-      <Infobar />
+      {/* <Infobar /> */}
       <FullGameContainer>
         <div>
           <Legend />
@@ -212,7 +303,7 @@ export default function App() {
         Start New Game
       </StartButton>
       <footer id="footer">
-        Designed and developed by Dennis Hart based on Hasbro Game.
+        Designed and developed by Dennis Hart based on the classic game.
       </footer>
     </div>
   );

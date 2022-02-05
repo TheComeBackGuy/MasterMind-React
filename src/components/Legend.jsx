@@ -1,5 +1,6 @@
 // import GameTimer from "./GameTimer";
 
+import { AiOutlineCloseCircle } from "react-icons/ai";
 import React from "react";
 import { listOfMarbles } from "../data/atoms";
 import styled from "styled-components";
@@ -46,17 +47,14 @@ export default function Legend() {
       <p>
         Use the clues to match the hidden combination of marbles at the top.
       </p>
-
       <h2>How To Play</h2>
       <p>
         Tap each marble to cycle through the colors. When you've changed them to
         your liking, Press "✔"
       </p>
-
       <h2>Legend</h2>
       <p>★ = Right color, right place </p>
       <p>☆ = Right color, wrong place </p>
-
       <h2>Available Colors</h2>
       <ul>
         {bagofMarbles.map((marble, index) => {
