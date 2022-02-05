@@ -19,7 +19,7 @@ import React from "react";
 import styled from "styled-components";
 
 const ResultContainer = styled.div`
-  width: 220px;
+  width: 50px;
   margin: 0 20px;
   padding: 10px 0 20px 0;
   height: 100%;
@@ -27,7 +27,7 @@ const ResultContainer = styled.div`
   flex-flow: column nowrap;
   align-items: left;
   justify-content: flex-end;
-  //   border: 3px solid green;
+  // border: 3px solid green;
 `;
 
 const SingleRowResult = styled.div`
@@ -62,7 +62,7 @@ const RowResult = styled.div`
   margin-bottom: 10px;
   width: 50px;
   height: 50px;
-  // border: 1px solid var(--mmBrightWhite);
+  border: 1px solid var(--mmBrightWhite);
   border-radius: 7px;
   color: var(--mmBrightWhite);
   text-align: left;

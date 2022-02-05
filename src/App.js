@@ -126,6 +126,12 @@ const InfobarButton = styled.button`
   cursor: pointer;
 `;
 
+const SpacerDiv = styled.div`
+  width: 50px;
+  // border: 1px solid yellow;
+  margin-right: 20px;
+`;
+
 export default function App() {
   const [isGameActive, setIsGameActive] = useRecoilState(activeGame);
   const [activeRowNumber, setActiveRowNumber] = useRecoilState(activeRow);
@@ -250,7 +256,7 @@ export default function App() {
 
   return (
     <div>
-      <PopUpContainer>
+      {/* <PopUpContainer>
         <PopUpMessage>
           <CloseWindowContainer>
             <CloseWindowButton>
@@ -260,7 +266,8 @@ export default function App() {
           <Legend />
         </PopUpMessage>
         <BlackLayer></BlackLayer>
-      </PopUpContainer>
+      </PopUpContainer> */}
+
       <Header>
         <InfobarButton>
           <BsQuestionCircle />
@@ -270,12 +277,12 @@ export default function App() {
           <BiCog />
         </InfobarButton>
       </Header>
-
       {/* <Infobar /> */}
       <FullGameContainer>
-        <div>
+        {/* <div>
           <Legend />
-        </div>
+        </div> */}
+        <SpacerDiv></SpacerDiv>
         <div>
           <TotalGrid />
         </div>
