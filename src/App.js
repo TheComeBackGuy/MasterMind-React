@@ -45,7 +45,7 @@ const FullGameContainer = styled.div`
   justify-content: center;
   margin: 30px auto 0 auto;
   width: fit-content;
-  border: 1px solid green;
+  // border: 1px solid green;
   // transform: scale(0.75);
   // & > div {
   //   // border: 1px solid red;
@@ -170,7 +170,7 @@ const SpacerDiv = styled.div`
 const AppContainer = styled.div`
   // display: sticky;
   width: 100%;
-  border: 1px solid yellow;
+  // border: 1px solid yellow;
 `;
 
 export default function App() {
