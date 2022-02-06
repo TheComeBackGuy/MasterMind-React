@@ -41,6 +41,10 @@ const hard = {
   color: "red",
 };
 
+const Footer = styled.div`
+  font-size: 10px;
+  font-weight: 200;
+`;
 export default function Settings() {
   return (
     <div>
@@ -57,7 +61,10 @@ export default function Settings() {
           <GiBrain />
         </DifficultyItem>
       </DifficultyList>
-      <p> Designed and developed by Dennis Hart based on the classic game.</p>
+      <Footer>
+        {" "}
+        Designed and developed by Dennis Hart based on the classic game.
+      </Footer>
     </div>
   );
 }

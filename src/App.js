@@ -30,16 +30,31 @@ import TotalGrid from "./components/TotalGrid";
 import styled from "styled-components";
 import { useEffect } from "react";
 
+const AppContainer = styled.div`
+  // display: sticky;
+  width: fit-content;
+  border: 1px solid yellow;
+  margin: 0 auto;
+`;
+
 const Logo = styled.h1`
   color: white;
+  font-family: "Teko", sans-serif;
   font-size: 60px;
   @media (max-width: 800px) {
     font-size: 40px;
-    // width: 100%;
   }
 `;
 
+const GameMask = styled.div`
+  width: 100%;
+  border: 3px solid blue;
+  overflow: hidden;
+  padding: 0 20px;
+`;
+
 const FullGameContainer = styled.div`
+  border: 1px solid red;
   display: flex;
   flex-flow: row nowrap;
   justify-content: center;
@@ -50,10 +65,6 @@ const FullGameContainer = styled.div`
   // & > div {
   //   // border: 1px solid red;
   // }
-  @media (max-width: 550px) {
-    border: none;
-    margin: 0 10px;
-  }
 `;
 
 const Header = styled.header`
@@ -91,7 +102,7 @@ const PopUpMessage = styled.div`
   background-color: var(--mmDarkRedShade);
   border-radius: 10px;
   //   border: 1px solid white;
-  font-size: 15px;
+  font-size: 12px;
   & h2 {
     border-bottom: 1px solid var(--mmWhite);
     margin: 20px 0 10px 0;
@@ -153,7 +164,6 @@ const InfobarButton = styled.button`
   font-size: 20px;
   cursor: pointer;
   @media (max-width: 800px) {
-    margin: 0;
   }
 `;
 
@@ -165,12 +175,6 @@ const SpacerDiv = styled.div`
   @media (max-width: 800px) {
     display: none;
   }
-`;
-
-const AppContainer = styled.div`
-  // display: sticky;
-  width: 100%;
-  // border: 1px solid yellow;
 `;
 
 export default function App() {
@@ -186,6 +190,13 @@ export default function App() {
   const [popUp, setPopUp] = useRecoilState(displayPopUp);
   const setPopupDisplayValue = useSetRecoilState(displayValue);
 
+  const gameBox = document.querySelector("#gameContainer");
+  // const gameRect = gameBox;
+  console.log(gameBox);
+
+  // let scaleFactor =
+  //   Window.innerWidth / ;
+  // console.log(document.querySelector("#gameContainer").style.width);
   // const [guessRow, setGuessRow] = useRecoilState(currentGuessRowState);
 
   useEffect(() => {
@@ -234,6 +245,9 @@ export default function App() {
     }
   }, [popUp]);
 
+  // useEffect(() => {
+  //   console.log("Scale Factor is: " + scaleFactor);
+  // });
   //generates a random answer for this round based on the column length
   function GenerateAnswer() {
     let tempAnswer = [];
@@ -296,7 +310,7 @@ export default function App() {
   // }
 
   return (
-    <AppContainer>
+    <AppContainer id="App">
       {/* this container is a popup for rules, settings, and history */}
       <PopUpContainer id="popupDisplay">
         <PopUpMessage>
@@ -359,18 +373,20 @@ export default function App() {
       </StartButton>
 
       {/* <Infobar /> */}
-      <FullGameContainer>
-        {/* <div>
+      <GameMask id="gameContainer">
+        <FullGameContainer>
+          {/* <div>
           <Legend />
         </div> */}
-        <SpacerDiv></SpacerDiv>
-        <div>
-          <TotalGrid />
-        </div>
-        <div>
-          <MarbleTracking id="submitButton" />
-        </div>
-      </FullGameContainer>
+          <SpacerDiv></SpacerDiv>
+          <div>
+            <TotalGrid />
+          </div>
+          <div>
+            <MarbleTracking id="submitButton" />
+          </div>
+        </FullGameContainer>
+      </GameMask>
       {/* 
       <footer id="footer">
       </footer> */}
