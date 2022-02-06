@@ -44,3 +44,8 @@ export const displayPopUp = atom({
   key: "display-popup",
   default: false,
 });
+
+export const displayValue = atom({
+  key: "display-value",
+  default: "settings",
+});

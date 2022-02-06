@@ -6,6 +6,7 @@ import {
   activeRow,
   currentGameHistory,
   displayPopUp,
+  displayValue,
   listOfMarbles,
   numberOfColumns,
   numberOfRows,
@@ -29,30 +30,44 @@ import TotalGrid from "./components/TotalGrid";
 import styled from "styled-components";
 import { useEffect } from "react";
 
+const Logo = styled.h1`
+  color: white;
+  font-size: 60px;
+  @media (max-width: 800px) {
+    font-size: 40px;
+    // width: 100%;
+  }
+`;
+
 const FullGameContainer = styled.div`
   display: flex;
   flex-flow: row nowrap;
   justify-content: center;
   margin: 30px auto 0 auto;
-  width: 100%;
-  // border: 1px solid green;
-  & > div {
-    // border: 1px solid red;
+  width: fit-content;
+  border: 1px solid green;
+  // transform: scale(0.75);
+  // & > div {
+  //   // border: 1px solid red;
+  // }
+  @media (max-width: 550px) {
+    border: none;
+    margin: 0 10px;
   }
 `;
 
 const Header = styled.header`
-  justify-self: center;
   display: flex;
   flex-flow: row nowrap;
   justify-content: center;
-  align-items: baseline;
+  align-items: center;
+
   margin: 0 auto;
   border-bottom: 1px solid var(--mmWhite);
 `;
 
 const PopUpContainer = styled.div`
-  display: flex;
+  display: none;
   flex-flow: column nowrap;
   align-items: center;
   justify-content: center;
@@ -77,7 +92,7 @@ const PopUpMessage = styled.div`
   border-radius: 10px;
   //   border: 1px solid white;
   font-size: 15px;
-  & > h2 {
+  & h2 {
     border-bottom: 1px solid var(--mmWhite);
     margin: 20px 0 10px 0;
   }
@@ -88,7 +103,6 @@ const BlackLayer = styled.div`
   position: absolute;
   top: 0;
   left: 0;
-
   width: 100%;
   height: 100%;
   background-color: rgba(0, 0, 0, 0.65);
@@ -138,12 +152,25 @@ const InfobarButton = styled.button`
   border-radius: 5px;
   font-size: 20px;
   cursor: pointer;
+  @media (max-width: 800px) {
+    margin: 0;
+  }
 `;
 
 const SpacerDiv = styled.div`
-  width: 50px;
+  display: flex;
+  width: 60px;
   // border: 1px solid yellow;
-  margin-right: 20px;
+  margin: 20px;
+  @media (max-width: 800px) {
+    display: none;
+  }
+`;
+
+const AppContainer = styled.div`
+  // display: sticky;
+  width: 100%;
+  border: 1px solid yellow;
 `;
 
 export default function App() {
@@ -157,6 +184,7 @@ export default function App() {
   const marbles = useRecoilValue(listOfMarbles);
   const resetGameHistory = useResetRecoilState(currentGameHistory);
   const [popUp, setPopUp] = useRecoilState(displayPopUp);
+  const setPopupDisplayValue = useSetRecoilState(displayValue);
 
   // const [guessRow, setGuessRow] = useRecoilState(currentGuessRowState);
 
@@ -268,7 +296,7 @@ export default function App() {
   // }
 
   return (
-    <div>
+    <AppContainer>
       {/* this container is a popup for rules, settings, and history */}
       <PopUpContainer id="popupDisplay">
         <PopUpMessage>
@@ -282,38 +310,34 @@ export default function App() {
             </CloseWindowButton>
           </CloseWindowContainer>
           {/* Space where content is loaded in  */}
-          <SwitchPopup content="rules" />
+          <SwitchPopup />
         </PopUpMessage>
-        <BlackLayer></BlackLayer>
+        <BlackLayer onClick={() => setPopUp(false)}></BlackLayer>
       </PopUpContainer>
 
       <Header>
         <InfobarButton
           id="rules"
           onClick={() => {
+            setPopupDisplayValue("rules");
+            // popupValue = "rules";
             setPopUp(true);
           }}
         >
           <BsQuestionCircle />
         </InfobarButton>
-        <h1>MASTERMIND</h1>
-        <InfobarButton id="settings">
+        <Logo>MASTERMIND</Logo>
+        <InfobarButton
+          id="settings"
+          onClick={() => {
+            setPopupDisplayValue("settings");
+
+            setPopUp(true);
+          }}
+        >
           <BiCog />
         </InfobarButton>
       </Header>
-      {/* <Infobar /> */}
-      <FullGameContainer>
-        {/* <div>
-          <Legend />
-        </div> */}
-        <SpacerDiv></SpacerDiv>
-        <div>
-          <TotalGrid />
-        </div>
-        <div>
-          <MarbleTracking id="submitButton" />
-        </div>
-      </FullGameContainer>
       <StartButton
         id="startButton"
         onClick={(e) => {
@@ -333,9 +357,23 @@ export default function App() {
       >
         Start New Game
       </StartButton>
+
+      {/* <Infobar /> */}
+      <FullGameContainer>
+        {/* <div>
+          <Legend />
+        </div> */}
+        <SpacerDiv></SpacerDiv>
+        <div>
+          <TotalGrid />
+        </div>
+        <div>
+          <MarbleTracking id="submitButton" />
+        </div>
+      </FullGameContainer>
+      {/* 
       <footer id="footer">
-        Designed and developed by Dennis Hart based on the classic game.
-      </footer>
-    </div>
+      </footer> */}
+    </AppContainer>
   );
 }

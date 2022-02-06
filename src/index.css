@@ -19,22 +19,15 @@ body {
   text-align: center;
 }
 
-h1 {
-  color: white;
-  font-size: 60px;
-  /* border-bottom: 1px solid var(--mmWhite); */
-}
-
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
-.App {
-  font-family: sans-serif;
-  text-align: center;
-  /* width: auto; */
+html,
+body {
+  width: 100%;
 }
 
 .container {

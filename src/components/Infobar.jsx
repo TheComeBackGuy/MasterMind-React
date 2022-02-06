@@ -1,13 +1,7 @@
-// import { numberOfColumns, numberOfRows } from "../data/atoms";
-
 import { BiCog } from "react-icons/bi";
 import { BsQuestionCircle } from "react-icons/bs";
 import React from "react";
 import styled from "styled-components";
-
-// import { useSetRecoilState } from "recoil";
-
-// import { useEffect } from "react/cjs/react.production.min";
 
 const InfobarContainer = styled.div`
   display: none;
@@ -24,16 +18,6 @@ const InfobarContainer = styled.div`
   font-size: 15px;
   border: 1px solid yellow;
 `;
-
-// const InfobarP = styled.div`
-//   display: flex;
-//   align-items: center;
-//   margin-right: 20px;
-//   // border: 1px solid green;
-//   &:last-child {
-//     margin-right: 0;
-//   }
-// `;
 
 const DifficultyDropDown = styled.div`
   display: flex;
