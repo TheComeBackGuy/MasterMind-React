@@ -22,6 +22,7 @@ import {
 import { AiOutlineCloseCircle } from "react-icons/ai";
 import { BiCog } from "react-icons/bi";
 import { BsQuestionCircle } from "react-icons/bs";
+import Helmet from "react-helmet";
 import MarbleTracking from "./components/MarbleTracking";
 // import { GenerateAnswer } from "./components/Infobar";
 // import Infobar from "./components/Infobar";
@@ -338,6 +339,14 @@ export default function App() {
 
   return (
     <AppContainer id="App">
+      <Helmet>
+        <meta property="og:image" content="%PUBLIC_URL%/preview.jpg" />
+        <meta
+          name="twitter:url"
+          content="https://mastermind-react-dh.netlify.app/"
+        />
+        <meta name="twitter:image" content="%PUBLIC_URL%/preview.jpg" />
+      </Helmet>
       {/* this container is a popup for rules, settings, and history */}
       <PopUpContainer id="popupDisplay">
         <PopUpMessage>
