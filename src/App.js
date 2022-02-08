@@ -340,12 +340,19 @@ export default function App() {
   return (
     <AppContainer id="App">
       <Helmet>
-        <meta property="og:image" content="%PUBLIC_URL%/preview.jpg" />
+        <meta name="twitter:card" content="summary" />
+        <meta name="twitter:site" content="@hartsyfartsy" />
+        <meta name="twitter:creator" content="@hartsyfartsy" />
         <meta
-          name="twitter:url"
+          property="og:url"
           content="https://mastermind-react-dh.netlify.app/"
         />
-        <meta name="twitter:image" content="%PUBLIC_URL%/preview.jpg" />
+        <meta property="og:title" content="Mastermind" />
+        <meta
+          property="og:description"
+          content="I'm a new Jr Designer looking for work and this is a project I made."
+        />
+        <meta property="og:image" content="%PUBLIC_URL%/preview.jpg" />
       </Helmet>
       {/* this container is a popup for rules, settings, and history */}
       <PopUpContainer id="popupDisplay">
