@@ -7,10 +7,12 @@ import {
   currentGameHistory,
   displayPopUp,
   displayValue,
+  gameWidthState,
   listOfMarbles,
   numberOfColumns,
   numberOfRows,
 } from "./data/atoms";
+import { useEffect, useRef } from "react";
 import {
   useRecoilState,
   useRecoilValue,
@@ -28,12 +30,11 @@ import SwitchPopup from "./components/SwitchPopup";
 // import { CreateAnswer } from "./components/CreateAnswer";
 import TotalGrid from "./components/TotalGrid";
 import styled from "styled-components";
-import { useEffect } from "react";
 
 const AppContainer = styled.div`
   // display: sticky;
-  width: fit-content;
-  border: 1px solid yellow;
+  width: 100vw;
+  // border: 1px solid yellow;
   margin: 0 auto;
 `;
 
@@ -47,19 +48,21 @@ const Logo = styled.h1`
 `;
 
 const GameMask = styled.div`
-  width: 100%;
-  border: 3px solid blue;
+  width: inherit;
+  // border: 3px solid blue;
   overflow: hidden;
-  padding: 0 20px;
+  // padding: 0 20px;
+  margin: 0 20px 50px 20px;
 `;
 
 const FullGameContainer = styled.div`
-  border: 1px solid red;
+  // border: 1px solid red;
   display: flex;
   flex-flow: row nowrap;
   justify-content: center;
-  margin: 30px auto 0 auto;
+  margin: 0 auto 0 auto;
   width: fit-content;
+  transform-origin: top left;
   // border: 1px solid green;
   // transform: scale(0.75);
   // & > div {
@@ -191,8 +194,33 @@ export default function App() {
   const setPopupDisplayValue = useSetRecoilState(displayValue);
 
   const gameBox = document.querySelector("#gameContainer");
+
+  const ref = useRef(null);
+
+  const [gameWidth, setGameWidth] = useRecoilState(gameWidthState);
+
+  useEffect(() => {
+    const windowWidth = window.innerWidth;
+    const gameWidth = ref.current.offsetWidth;
+    const scaleAmount = windowWidth / gameWidth;
+    console.log(windowWidth / gameWidth);
+    console.log("width", ref.current.offsetWidth);
+    console.log(ref);
+
+    // if window is thinner than game, scale the game to fit
+    if (window.innerWidth < ref.current.offsetWidth) {
+      document.querySelector(
+        "#fullGameContainer"
+      ).style.transform = `scale(${scaleAmount})`;
+      ref.current.backgroundColor = "red";
+      console.log("TOO SMALL!!");
+    }
+
+    // gameBox.style.width =
+  }, []);
+
   // const gameRect = gameBox;
-  console.log(gameBox);
+  // console.log(gameBox);
 
   // let scaleFactor =
   //   Window.innerWidth / ;
@@ -374,7 +402,7 @@ export default function App() {
 
       {/* <Infobar /> */}
       <GameMask id="gameContainer">
-        <FullGameContainer>
+        <FullGameContainer ref={ref} id="fullGameContainer">
           {/* <div>
           <Legend />
         </div> */}

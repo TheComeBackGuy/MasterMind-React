@@ -49,3 +49,8 @@ export const displayValue = atom({
   key: "display-value",
   default: "settings",
 });
+
+export const gameWidthState = atom({
+  key: "game-width",
+  default: null,
+});
