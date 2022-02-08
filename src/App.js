@@ -7,7 +7,6 @@ import {
   currentGameHistory,
   displayPopUp,
   displayValue,
-  gameWidthState,
   listOfMarbles,
   numberOfColumns,
   numberOfRows,
