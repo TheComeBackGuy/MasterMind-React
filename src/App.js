@@ -193,11 +193,11 @@ export default function App() {
   const [popUp, setPopUp] = useRecoilState(displayPopUp);
   const setPopupDisplayValue = useSetRecoilState(displayValue);
 
-  const gameBox = document.querySelector("#gameContainer");
+  // const gameBox = document.querySelector("#gameContainer");
 
   const ref = useRef(null);
 
-  const [gameWidth, setGameWidth] = useRecoilState(gameWidthState);
+  // const [gameWidth, setGameWidth] = useRecoilState(gameWidthState);
 
   useEffect(() => {
     const windowWidth = window.innerWidth;
