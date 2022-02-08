@@ -51,12 +51,12 @@ const GameMask = styled.div`
   // border: 3px solid blue;
   overflow: hidden;
   // padding: 0 20px;
-  margin: 0 20px 50px 20px;
+  margin: 0 auto 50px auto;
 `;
 
 const FullGameContainer = styled.div`
-  // border: 1px solid red;
   display: flex;
+  padding: 0 10px;
   flex-flow: row nowrap;
   justify-content: center;
   margin: 0 auto 0 auto;
@@ -322,7 +322,7 @@ export default function App() {
     //removes the customization bar
     //shows the submit button
     document.querySelector("#submitButton").style.display = "flex";
-
+    document.querySelector("#row1").scrollIntoView();
     // generateDefaultRow(cols, activeRowNumber);
     // console.log("clear the board");
     // console.log("Start the timer");
@@ -414,9 +414,8 @@ export default function App() {
           </div>
         </FullGameContainer>
       </GameMask>
-      {/* 
-      <footer id="footer">
-      </footer> */}
+
+      <footer id="footer"></footer>
     </AppContainer>
   );
 }
