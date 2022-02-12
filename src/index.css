@@ -86,7 +86,7 @@ body {
 .black {
   background-image: url(./images/hole.gif);
   border: 1px solid var(--darkGrey);
-  transition: 2s ease-in-out;
+  transition: 1s ease-in-out;
 }
 .red {
   background-image: url("./images/marble-red.png");

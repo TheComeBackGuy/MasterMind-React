@@ -20,23 +20,37 @@ export default function AnswerRow() {
   // const cols = useRecoilValue(numberOfColumns);
 
   function marbleFades() {
-    let marbleArrangement = new Array(cols).fill(
-      marbles[Math.floor(Math.random() * marbles.length)]
-    );
+    let marbleArrangement = new Array(cols).fill(marbles[0]);
+
+    setInterval(marbleTimer, 1500 + 500);
+
+    function marbleTimer() {
+      // pick a random marble
+      //change stylesheet
+
+      const chosenMarble = document.getElementById(
+        `${Math.floor(Math.random() * cols)}`
+      );
+      console.log(chosenMarble.style);
+      // chosenMarble.style.transform = "2s ease-in";
+      chosenMarble.classList.replace(
+        chosenMarble.classList[1],
+        marbles[Math.floor(Math.random() * cols)]
+      );
+    }
+
     console.log(marbleArrangement);
     return (
       <ul id={`answer`} className="marbleRow">
-        {marbleArrangement.map((col) => {
+        {marbleArrangement.map((col, index) => {
           return (
             <button
               key={`${marbleArrangement[marbleArrangement.indexOf(col)]}-${
                 Math.random() * 15000
               }`}
-              id={`${marbleArrangement[marbleArrangement.indexOf(col)]}`}
+              id={`${index}`}
               className={`hole answerBlack marble`}
-            >
-              ?
-            </button>
+            ></button>
           );
         })}
       </ul>
@@ -60,10 +74,11 @@ export default function AnswerRow() {
           })}
         </ul>
       );
-      //if no game ahs been started yet
+      //if no game has been started yet
     } else if (!gameIsActive && sessionStarted === false) {
       console.log("the game has not begun yet");
       return <>{marbleFades()}</>;
+      //game has started and answer is hidden
     } else {
       return (
         <ul id={`answer`} className="marbleRow">
