@@ -30,6 +30,7 @@ export default function TotalGrid({ answer }) {
         <div className="divot ur"></div>
       </div>
       {/* <RowOfButtons answer={answer} /> */}
+      {/* <Marblefades /> */}
       <AnswerRow />
       <MakeStacks />
       <div className="divotContainer">

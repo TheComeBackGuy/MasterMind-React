@@ -10,6 +10,7 @@ import {
   listOfMarbles,
   numberOfColumns,
   numberOfRows,
+  sessionStartedState,
 } from "./data/atoms";
 import { useEffect, useRef } from "react";
 import {
@@ -192,7 +193,7 @@ export default function App() {
   const resetGameHistory = useResetRecoilState(currentGameHistory);
   const [popUp, setPopUp] = useRecoilState(displayPopUp);
   const setPopupDisplayValue = useSetRecoilState(displayValue);
-
+  const setSessionStarted = useSetRecoilState(sessionStartedState);
   // const gameBox = document.querySelector("#gameContainer");
 
   const ref = useRef(null);
@@ -305,11 +306,10 @@ export default function App() {
   function StartNewGame(e) {
     //litghtswitch for game elements
     setIsGameActive(true);
-
+    // changes when first game is started
+    setSessionStarted(true);
     //reset the move history
     resetGameHistory();
-
-    // document.getElementById("submitButton").style.display = "flex";
 
     GenerateAnswer();
 

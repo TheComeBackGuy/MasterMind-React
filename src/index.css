@@ -74,8 +74,8 @@ body {
 
 .answerBlack {
   background-image: url(./images/black.png);
-
   filter: drop-shadow(0 3mm 2mm #101010);
+  transition: 2s ease-in-out;
 }
 .marble {
   background-size: 52px;
@@ -86,32 +86,38 @@ body {
 .black {
   background-image: url(./images/hole.gif);
   border: 1px solid var(--darkGrey);
+  transition: 2s ease-in-out;
 }
 .red {
   background-image: url("./images/marble-red.png");
   background-size: fit-content;
   filter: drop-shadow(0 3mm 2mm #381111);
   border: none;
+  transition: 0.15s ease-in-out;
 }
 .purple {
   background-image: url("./images/marble-purple.png");
   filter: drop-shadow(0 3mm 2mm #3f1d3b);
   border: none;
+  transition: 0.15s ease-in-out;
 }
 .green {
   background-image: url("./images/marble-green.png");
   filter: drop-shadow(0 3mm 2mm #172a14);
   border: none;
+  transition: 0.15s ease-in-out;
 }
 .yellow {
   background-image: url("./images/marble-yellow.png");
   filter: drop-shadow(0 3mm 2mm #3f3d1d);
   border: none;
+  transition: 0.15s ease-in-out;
 }
 .blue {
   background-image: url("./images/marble-blue.png");
   filter: drop-shadow(0 3mm 2mm #17183f);
   border: none;
+  transition: 0.15s ease-in-out;
 }
 
 footer {

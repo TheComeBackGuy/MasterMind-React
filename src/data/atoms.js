@@ -54,3 +54,8 @@ export const gameWidthState = atom({
   key: "game-width",
   default: null,
 });
+
+export const sessionStartedState = atom({
+  key: "session-started",
+  default: false,
+});
